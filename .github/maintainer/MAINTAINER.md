@@ -61,8 +61,7 @@ it, and every one of them gets a home. Pick the smallest home that fits (CONTRIB
 - `pm hide`/`pm block` needs the matching unhide/unblock undo in the header.
 
 ## Scope and taste
-- The launcher stays small, offline and fast: no INTERNET permission, no network features (self-update,
-  crypto, weather APIs were refused), no heavy libraries, no prebuilt binaries in the repo (not even as CI
+- The launcher stays small and fast: no heavy libraries, no prebuilt binaries in the repo (not even as CI
   artifacts).
 - Changes to the safety rules in PROMPT.md, the Home-safety logic in the scripts, the China TCL rule,
   CI/workflows or the APK size gate need the maintainer: **hold**.
@@ -93,8 +92,6 @@ review.
 - When two open PRs build the same helper or fix, pick one as its home and ask the other author to fold their
   part in (rework, not hold). If another PR already fixes the same thing more completely, close the narrower one.
 - Contributor PRs whose main content is a new CI workflow that builds or publishes releases: **close** kindly.
-- A launcher PR that adds the INTERNET permission or network access → **showcase**; if it carries a TV list, ask
-  for the list as its own PR in the same comment.
 
 ## Learned from the 21–22 Oct rounds (reviewed)
 - A translation PR that moves hard-coded strings into resources is welcome; unrelated build changes riding along

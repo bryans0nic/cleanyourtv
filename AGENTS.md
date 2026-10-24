@@ -69,7 +69,7 @@ share their TV's list afterwards, follow [Add a TV list](#add-a-tv-list) below.
 | `CODE_OF_CONDUCT.md` | Includes the rule against publishing device identifiers, Wi-Fi names and IPs. |
 | `examples/` | One folder per tested TV model: `debloat.txt`, sometimes a `README.md` and a `config.json`. Indexed in `examples/README.md`. |
 | `docs/` | `docs/TROUBLESHOOTING.md`, `docs/REMOTE.md` (another home, over Tailscale), `docs/modules.md` and `docs/specs/card.md` (module cards), `docs/PRESS.md`, `docs/devices/` for models with notes but no tested list, and `docs/workflows/` for multi-step methods (see [Workflows](#workflows)). |
-| `launcher/` | The reference launcher, package `com.gathin.tvhome`: plain Java, AndroidX RecyclerView and DynamicAnimation, `minSdk` 26, no `INTERNET` permission. |
+| `launcher/` | The reference launcher, package `com.gathin.tvhome`: plain Java, AndroidX RecyclerView and DynamicAnimation, `minSdk` 26. |
 | `themes/` | One folder per theme: `config.json`, a required `screenshot.jpg`, optional wallpapers. Keys are documented in `themes/README.md`. |
 | `addons/` | Optional module-card apps, each its own Gradle project, never built into the launcher. |
 | `tools/` | The ADB client and the scripts: `tv.py`, `b64push.py`, `relay.py` (guide: `tools/relay.md`), `disable.sh`, `restore.sh`, `recovery.py`, `check.py`, `privacy.py`, `theme.sh`, `adb-closed.py`, `bench.py`, `trace.py` and `trace_report.py` (guide: `tools/trace.md`, optional `tools/requirements-perf.txt`), `flamechart.py` (guide: `tools/flamechart.md`), `race_calendar.py`. Shell scripts have PowerShell twins (`disable.ps1` and the like). `readme_stats.py`, `readme_featured.py` and `readme_card.py` draw the README card. Each script's usage is in its first lines: read it before running it. |
@@ -88,7 +88,7 @@ The core stays small on purpose. Pick the smallest home that fits (CONTRIBUTING,
 | A small launcher switch that is off by default | A pull request here: see [the switch recipe](#add-an-off-by-default-launcher-switch) |
 | A new look: colours, wallpaper, dock, columns, that existing config keys can carry | `themes/<name>/` |
 | A widget or tile that can be its own small app | `addons/<name>/`, as a module card that never touches `launcher/` |
-| A whole new launcher, a heavy restyle, a port to another platform, a lower `minSdk`, new permissions or network access, Fire TV Home takeover, a changed default for every TV | Your own repository, plus one row in `SHOWCASE.md` |
+| A whole new launcher, a heavy restyle, a port to another platform, a lower `minSdk`, new permissions, Fire TV Home takeover, a changed default for every TV | Your own repository, plus one row in `SHOWCASE.md` |
 | Safety rules in `PROMPT.md`, the Home-safety logic in the scripts, protected packages, CI and workflows, the APK size gate | Open an issue for the maintainer; do not change it in a PR |
 
 ### What gets merged, sent back or closed
@@ -263,8 +263,7 @@ Never do these in a PR:
 - **No prebuilt APKs or binaries** in the repo, not even as CI artifacts. People build from source.
 - **No uninstalling.** No `pm uninstall` in a list or a script. `pm hide` or `pm block` only with the matching
   undo written in the list header.
-- **No network in the launcher:** no `INTERNET` permission, no network features, no analytics or telemetry, no
-  background services or polling, no blur or video. It targets TVs with 1 GB of RAM.
+- **Keep the launcher light:** no blur or video. It targets TVs with 1 GB of RAM.
 - **No new launcher dependencies** without discussing them in an issue first.
 - **No changes to the safety rules** in `PROMPT.md`, the Home guard and other safety checks in
   `tools/disable.sh`, `tools/check.py` and `launcher/build-and-install.sh`, or the list of packages the TV
